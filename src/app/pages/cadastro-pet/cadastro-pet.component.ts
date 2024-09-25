@@ -1,0 +1,78 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { PetService } from '../../services/pet.service';
+import { AccesoService } from '../../services/acceso.service';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessModalComponent } from '../../success-modal/success-modal.component';
+import { CommonModule } from '@angular/common'; // Importando CommonModule
+
+@Component({
+  selector: 'app-cadastro-pet',
+  templateUrl: './cadastro-pet.component.html',
+  styleUrls: ['./cadastro-pet.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule] // Incluindo tanto ReactiveFormsModule quanto CommonModule
+})
+export class CadastroPetComponent {
+  cadastroPetForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder, 
+    private petService: PetService, 
+    private accesoService: AccesoService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    this.cadastroPetForm = this.fb.group({
+      nome: ['', Validators.required],
+      idade: ['', [Validators.required, Validators.min(0)]],
+      tipo: ['', Validators.required],
+      raca: ['', Validators.required],
+      porte: ['', Validators.required],
+      castrado: [false, Validators.required]
+    });
+  }
+
+  onSubmit() {
+    if (this.cadastroPetForm.valid) {
+      const donoId = this.accesoService.getDonoId();
+      console.log('ID do Dono:', donoId);
+      if (donoId) {
+        const petData = {
+          ...this.cadastroPetForm.value,
+          donoId: donoId
+        };
+
+        petData.castrado = petData.castrado;
+
+        console.log('Dados do Pet a serem enviados:', petData);
+
+        this.petService.cadastrarPet(petData).subscribe(
+          response => {
+            console.log('Pet cadastrado com sucesso', response);
+            this.openSuccessModal();
+          },
+          error => {
+            console.error('Erro ao cadastrar pet', error);
+          }
+        );
+      } else {
+        console.error('ID do dono não encontrado.');
+      }
+    } else {
+      console.error('Formulário inválido:', this.cadastroPetForm.errors);
+    }
+  }
+
+  openSuccessModal() {
+    const dialogRef = this.dialog.open(SuccessModalComponent, {
+      width: '300px',
+      data: { message: 'Pet cadastrado com sucesso!' }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/inicio']);
+    });
+  }
+}
