@@ -13,7 +13,7 @@ interface Dono {
   cidade: string;
   estado: string;
   cep: string;
-  telefone?: string; 
+  telefone?: string;
 }
 
 @Component({
@@ -83,4 +83,27 @@ export class ProfileComponent implements OnInit {
     this.toggleEditMode();
     this.loadDonoData(); // Recarregar dados do servidor
   }
+
+  deleteAccount() {
+    if (this.donoId !== null) {
+        const confirmDelete = confirm('Tem certeza de que deseja excluir sua conta? Esta ação não pode ser desfeita.');
+
+        if (confirmDelete) {
+            this.donoService.deleteDono(this.donoId).subscribe(
+                () => {
+                    console.log('Conta excluída com sucesso.');
+                    this.acessoService.logout(); // Deslogar o usuário
+                    window.location.href = '/login'; // Redirecionar para a página de login ou outra página
+                },
+                (error) => {
+                    console.error('Erro ao excluir a conta:', error);
+                    if (error.error) {
+                        console.error('Detalhes do erro:', error.error);
+                    }
+                }
+            );
+        }
+    }
+}
+
 }

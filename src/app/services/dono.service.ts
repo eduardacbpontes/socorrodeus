@@ -29,4 +29,10 @@ export class DonoService {
   updateDono(id: number, dono: Dono): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, dono);
   }
+
+  // Método para excluir o dono
+  deleteDono(id: number) {
+    // Aqui, você pode usar o método DELETE e ignorar o corpo, mas como você pediu para manter a lógica similar, está passando o dono.
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

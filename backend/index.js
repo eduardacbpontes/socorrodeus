@@ -17,7 +17,7 @@ app.use('/api/donos', donoRoutes);
 app.use('/api/pets', petRoutes);
 app.use('/api/auth', authRoutes); // Adicionei a rota de autenticação
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
   });

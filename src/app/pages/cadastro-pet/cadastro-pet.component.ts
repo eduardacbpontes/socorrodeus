@@ -4,7 +4,6 @@ import { PetService } from '../../services/pet.service';
 import { AccesoService } from '../../services/acceso.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { SuccessModalComponent } from '../../success-modal/success-modal.component';
 import { CommonModule } from '@angular/common'; // Importando CommonModule
 
 @Component({
@@ -51,7 +50,7 @@ export class CadastroPetComponent {
         this.petService.cadastrarPet(petData).subscribe(
           response => {
             console.log('Pet cadastrado com sucesso', response);
-            this.openSuccessModal();
+            //this.openSuccessModal();
           },
           error => {
             console.error('Erro ao cadastrar pet', error);
@@ -65,14 +64,4 @@ export class CadastroPetComponent {
     }
   }
 
-  openSuccessModal() {
-    const dialogRef = this.dialog.open(SuccessModalComponent, {
-      width: '300px',
-      data: { message: 'Pet cadastrado com sucesso!' }
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.router.navigate(['/inicio']);
-    });
-  }
 }

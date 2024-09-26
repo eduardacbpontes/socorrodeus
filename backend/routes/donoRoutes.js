@@ -52,18 +52,23 @@ router.put('/:id', async (req, res) => {
 });
 
 // Deletar Dono
+// Deletar Dono
 router.delete('/:id', async (req, res) => {
+  console.log('Requisição DELETE recebida para ID:', req.params.id);
   try {
     const dono = await Dono.findByPk(req.params.id);
     if (dono) {
       await dono.destroy();
       res.json({ message: 'Dono deletado' });
     } else {
+      console.log('Dono não encontrado para ID:', req.params.id);
       res.status(404).json({ error: 'Dono não encontrado' });
     }
   } catch (error) {
+    console.error('Erro ao deletar dono:', error.message);
     res.status(400).json({ error: error.message });
   }
 });
+
 
 module.exports = router;

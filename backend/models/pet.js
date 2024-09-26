@@ -1,4 +1,3 @@
-// backend/models/pet.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Dono = require('./dono');
@@ -30,8 +29,8 @@ const Pet = sequelize.define('Pet', {
   },
 });
 
-// Definindo a relação entre Pet e Dono
-Pet.belongsTo(Dono, { foreignKey: 'donoId' }); // Alterado para donoId
-Dono.hasMany(Pet, { foreignKey: 'donoId' }); // Alterado para donoId
+// Definindo a relação entre Pet e Dono com onDelete: 'CASCADE'
+Pet.belongsTo(Dono, { foreignKey: 'donoId', onDelete: 'CASCADE' });
+Dono.hasMany(Pet, { foreignKey: 'donoId', onDelete: 'CASCADE' }); // Cascata na exclusão de Dono também
 
 module.exports = Pet;
