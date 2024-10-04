@@ -8,6 +8,7 @@ import { RegistroComponent } from './app/pages/registro/registro.component';
 import { InicioComponent } from './app/pages/inicio/inicio.component';
 import { DashboardComponent } from './app/pages/dashboard/dashboard.component';
 import { ProfileComponent } from './app/pages/profile/profile.component';
+import { EditarPetComponent } from './app/pages/editar-pet/editar-pet.component';
 import { CadastroPetComponent } from './app/pages/cadastro-pet/cadastro-pet.component'; 
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -31,6 +32,7 @@ bootstrapApplication(AppComponent, {
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'cadastro-pet', component: CadastroPetComponent }, 
+      {path: 'editar-pet', component: EditarPetComponent}
     ]),
     provideAnimations(),
     ReactiveFormsModule, // Adicionar ReactiveFormsModule aqui
