@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Página inicial (home) após login
   { path: 'profile', component: ProfileComponent }, // Página de perfil
   { path: 'cadastro-pet', component: CadastroPetComponent },
-  { path: 'editar-pet', component: EditarPetComponent },
+  { path: 'editar-pet/id', component: EditarPetComponent }, // Adicionado o parâmetro :id
 ];
 
 @NgModule({

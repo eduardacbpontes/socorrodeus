@@ -32,17 +32,30 @@
       </a>
     </li>
     <li>
-      <a a (click)="cadastrarPet()">
-        <span class="menu-icon material-icons">add</span> 
+      <a (click)="cadastrarPet()">
+        <span class="menu-icon material-icons">add</span>
         <span class="menu-text">Cadastrar Pet</span>
       </a>
     </li>
     <li>
-      <a a (click)="config()">
+      <a (click)="config()">
         <span class="menu-icon material-icons">settings</span>
         <span class="menu-text">Configurações</span>
       </a>
     </li>
+    <li>
+      <a (click)="listarpets()">
+        <span class="menu-icon material-icons">list</span>
+        <span class="menu-text">Meus pets</span>
+      </a>
+    </li>
+    <!-- Exibe a lista de pets cadastrados -->
+    <ul *ngIf="pets.length > 0" style="padding-left: 20px;">
+      <li *ngFor="let pet of pets">
+        <span class="menu-icon material-icons">pets</span>
+        <span (click)="editarPet(pet.id)" style="cursor: pointer;">{{ pet.nome }} - {{ pet.raca }}</span> <!-- Chama editarPet ao clicar -->
+      </li>
+    </ul>
     <li>
       <a (click)="logout()">
         <span class="menu-icon material-icons">logout</span>

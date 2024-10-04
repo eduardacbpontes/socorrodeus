@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
+import { PetService } from '../../services/pet.service';
+import { AccesoService } from '../../services/acceso.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,8 +26,14 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   isSidebarVisible = true;
   isSubmenuOpen = false;
+  pets: any[] = []; // Lista de pets do usuário
 
-  constructor(private sidebarService: SidebarService, private router: Router) {}
+  constructor(
+    private sidebarService: SidebarService,
+    private petService: PetService,
+    private accesoService: AccesoService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.sidebarService.sidebarVisibility$.subscribe((isVisible) => {
@@ -43,7 +51,7 @@ export class SidebarComponent implements OnInit {
   }
 
   cadastrarPet() {
-    console.log('cadastrando pet');
+    console.log('Cadastrando pet');
     this.router.navigate(['/cadastro-pet']);
   }
 
@@ -52,9 +60,26 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/Config']);
   }
 
-
   logout() {
     console.log('Logging out...');
+    this.accesoService.logout();
     this.router.navigate(['/login']);
+  }
+
+  listarpets() {
+    const donoId = this.accesoService.getDonoId(); // Obtém o ID do dono logado
+    if (donoId) {
+      this.petService.getPetsByDono(donoId).subscribe((pets) => {
+        this.pets = pets; // Atribui os pets à variável
+        console.log('Lista de pets:', pets);
+      });
+    } else {
+      console.log('Dono não logado.');
+    }
+  }
+
+  // Método para editar o pet e redirecionar para a página de edição
+  editarPet(petId: number) {
+    this.router.navigate(['/editar-pet', { id: petId }]); // Redireciona para a página de edição com o ID do pet
   }
 }
