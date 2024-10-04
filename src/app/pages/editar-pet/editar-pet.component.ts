@@ -43,7 +43,7 @@ export class EditarPetComponent implements OnInit {
     private petService: PetService, 
     private accesoService: AccesoService,
     private route: ActivatedRoute, // Para acessar parâmetros da rota
-    private router: Router // Para redirecionar após exclusão
+    public router: Router // Para redirecionar após exclusão
   ) {}
 
   ngOnInit() {
@@ -81,6 +81,8 @@ export class EditarPetComponent implements OnInit {
         (response) => {
           console.log('Dados do pet atualizados com sucesso!');
           this.toggleEditMode();
+          alert('Dados do pet atualizados com sucesso!');
+            this.router.navigate(['/inicio']);
         },
         (error) => {
           console.error('Erro ao atualizar dados do pet:', error);
@@ -102,7 +104,7 @@ export class EditarPetComponent implements OnInit {
         this.petService.deletePet(this.petId).subscribe(
           () => {
             console.log('Pet excluído com sucesso.');
-            this.router.navigate(['/pets']); // Redirecionar para a lista de pets ou outra página
+            this.router.navigate(['/inicio']); // Redirecionar para a lista de pets ou outra página
           },
           (error) => {
             console.error('Erro ao excluir o pet:', error);

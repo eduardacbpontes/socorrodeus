@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface Dono {
   nome: string;
@@ -36,7 +37,7 @@ export class ProfileComponent implements OnInit {
   isEditMode = false;
   donoId: number | null = null;
 
-  constructor(private donoService: DonoService, private acessoService: AccesoService) {}
+  constructor(private donoService: DonoService, private acessoService: AccesoService,  public router: Router) {}
 
   ngOnInit() {
     this.donoId = this.acessoService.getDonoId();
@@ -70,7 +71,9 @@ export class ProfileComponent implements OnInit {
       this.donoService.updateDono(this.donoId, this.dono).subscribe(
         (response) => {
           console.log('Dados atualizados com sucesso!');
+          alert('Dados atualizados com sucesso!');
           this.toggleEditMode();
+          this.router.navigate(['/inicio']);
         },
         (error) => {
           console.error('Erro ao atualizar dados:', error);

@@ -11,7 +11,6 @@
       </div>
       <div class="profile-details">
         <h2>Nome: {{ dono.nome }}</h2>
-        <!-- Exibir campos editáveis no modo de edição -->
         <ng-container *ngIf="isEditMode; else displayMode">
           <p>
             Email: <input [(ngModel)]="dono.email" />
@@ -25,17 +24,12 @@
           <p>
             CEP: <input [(ngModel)]="dono.cep" />
           </p>
-          <p>
-          
-          </p>
         </ng-container>
-        <!-- Exibir os campos não editáveis no modo de exibição -->
         <ng-template #displayMode>
           <p>Email: {{ dono.email }}</p>
           <p>Rua: {{ dono.rua }}</p>
           <p>Cidade/Estado: {{ dono.cidade }}, {{ dono.estado }}</p>
           <p>CEP: {{ dono.cep }}</p>
-          
         </ng-template>
 
         <button mat-raised-button color="accent" (click)="toggleEditMode()">
@@ -45,13 +39,19 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <!-- Exibir os botões Salvar e Cancelar no modo de edição -->
     <ng-container *ngIf="isEditMode">
       <button mat-raised-button color="primary" (click)="saveChanges()">Salvar</button>
-      <button mat-raised-button color="warn" (click)="cancelEdit()">Cancelar</button>
+      <!-- O botão "Cancelar" é gerado pelo botão de alternância -->
     </ng-container>
-  
-    <!-- Botão de excluir conta -->
-    <button mat-raised-button color="warn" (click)="deleteAccount()">Excluir Conta</button>
+
+    <!-- Ícone de lixeira como um link -->
+    <div class="icon-button">
+      <a (click)="deleteAccount()" routerLinkActive="active">
+        <span class="menu-icon material-icons">delete</span>
+      </a>
+    </div>     
+
+    <!-- Botão de Voltar -->
+    <button mat-raised-button color="primary" (click)="router.navigate(['/inicio'])">Voltar</button>
   </mat-card-actions>
 </mat-card>

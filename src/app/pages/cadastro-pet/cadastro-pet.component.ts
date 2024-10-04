@@ -20,7 +20,7 @@ export class CadastroPetComponent {
     private fb: FormBuilder, 
     private petService: PetService, 
     private accesoService: AccesoService,
-    private router: Router,
+    public router: Router,
     private dialog: MatDialog
   ) {
     this.cadastroPetForm = this.fb.group({
@@ -50,7 +50,8 @@ export class CadastroPetComponent {
         this.petService.cadastrarPet(petData).subscribe(
           response => {
             console.log('Pet cadastrado com sucesso', response);
-            //this.openSuccessModal();
+            alert('Cadastro realizado com sucesso!');
+            this.router.navigate(['/inicio']);
           },
           error => {
             console.error('Erro ao cadastrar pet', error);

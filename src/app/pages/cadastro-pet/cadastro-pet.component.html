@@ -4,7 +4,7 @@
     <div>
       <label for="nome">Nome:</label>
       <input id="nome" formControlName="nome" />
-      <div *ngIf="cadastroPetForm.get('nome')?.invalid && cadastroPetForm.get('nome')?.touched">
+      <div *ngIf="cadastroPetForm.get('nome')?.invalid && cadastroPetForm.get('nome')?.touched" class="error-message">
         Nome é obrigatório.
       </div>
     </div>
@@ -12,7 +12,7 @@
     <div>
       <label for="idade">Idade:</label>
       <input id="idade" type="number" formControlName="idade" />
-      <div *ngIf="cadastroPetForm.get('idade')?.invalid && cadastroPetForm.get('idade')?.touched">
+      <div *ngIf="cadastroPetForm.get('idade')?.invalid && cadastroPetForm.get('idade')?.touched" class="error-message">
         Idade deve ser um número positivo.
       </div>
     </div>
@@ -20,7 +20,7 @@
     <div>
       <label for="tipo">Tipo:</label>
       <input id="tipo" formControlName="tipo" />
-      <div *ngIf="cadastroPetForm.get('tipo')?.invalid && cadastroPetForm.get('tipo')?.touched">
+      <div *ngIf="cadastroPetForm.get('tipo')?.invalid && cadastroPetForm.get('tipo')?.touched" class="error-message">
         Tipo é obrigatório.
       </div>
     </div>
@@ -28,7 +28,7 @@
     <div>
       <label for="raca">Raça:</label>
       <input id="raca" formControlName="raca" />
-      <div *ngIf="cadastroPetForm.get('raca')?.invalid && cadastroPetForm.get('raca')?.touched">
+      <div *ngIf="cadastroPetForm.get('raca')?.invalid && cadastroPetForm.get('raca')?.touched" class="error-message">
         Raça é obrigatória.
       </div>
     </div>
@@ -40,7 +40,7 @@
         <option [ngValue]="false">Não</option>
         <option [ngValue]="true">Sim</option>
       </select>
-      <div *ngIf="cadastroPetForm.get('castrado')?.invalid && cadastroPetForm.get('castrado')?.touched">
+      <div *ngIf="cadastroPetForm.get('castrado')?.invalid && cadastroPetForm.get('castrado')?.touched" class="error-message">
         Castrado é obrigatório.
       </div>
     </div>
@@ -56,11 +56,12 @@
         <option value="grande">Grande</option>
         <option value="gigante">Gigante</option>
       </select>
-      <div *ngIf="cadastroPetForm.get('porte')?.invalid && cadastroPetForm.get('porte')?.touched">
+      <div *ngIf="cadastroPetForm.get('porte')?.invalid && cadastroPetForm.get('porte')?.touched" class="error-message">
         Porte é obrigatório.
       </div>
     </div>
 
     <button type="submit" [disabled]="cadastroPetForm.invalid">Cadastrar Pet</button>
+    <button type="button" (click)="router.navigate(['/inicio'])" class="cancel-button">Cancelar</button>
   </form>
 </div>
