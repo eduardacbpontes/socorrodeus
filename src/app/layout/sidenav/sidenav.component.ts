@@ -55,6 +55,11 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/cadastro-pet']);
   }
 
+  adotarPet() {
+    console.log('adotando pet');
+    this.router.navigate(['/adotar-pet']);
+  }
+
   config() {
     console.log('Configurações');
     this.router.navigate(['/Config']);

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router'; // Import necessário para obter o ID pela rota
 
+// Atualizando a interface Pet para incluir 'paraAdocao'
 interface Pet {
   id: number; // O ID pode ser opcional na interface Pet
   nome: string;
@@ -16,6 +17,7 @@ interface Pet {
   porte: string;
   castrado: boolean;
   donoId: number; // Agora incluímos o donoId
+  paraAdocao: boolean; // Adicionando o campo para adoção
 }
 
 @Component({
@@ -34,7 +36,8 @@ export class EditarPetComponent implements OnInit {
     raca: '',
     porte: '',
     castrado: false,
-    donoId: 0 // Inicialize donoId com 0 ou outro valor padrão
+    donoId: 0, // Inicialize donoId com 0 ou outro valor padrão
+    paraAdocao: false // Inicialize paraAdocao com false
   };
   isEditMode = false;
   petId: number | null = null;
@@ -82,7 +85,7 @@ export class EditarPetComponent implements OnInit {
           console.log('Dados do pet atualizados com sucesso!');
           this.toggleEditMode();
           alert('Dados do pet atualizados com sucesso!');
-            this.router.navigate(['/inicio']);
+          this.router.navigate(['/inicio']);
         },
         (error) => {
           console.error('Erro ao atualizar dados do pet:', error);

@@ -11,6 +11,7 @@ interface Pet {
   raca: string;
   porte: string;
   castrado: boolean;
+  paraAdocao: boolean; // Novo campo para adoção
   donoId: number; // Relacionamento com o Dono
 }
 
@@ -45,5 +46,10 @@ export class PetService {
   // Método para obter todos os pets de um dono específico (opcional)
   getPetsByDono(donoId: number): Observable<Pet[]> {
     return this.http.get<Pet[]>(`${this.apiUrl}?donoId=${donoId}`); // Faz a requisição GET para listar os pets de um dono
+  }
+
+  // Método para obter todos os pets disponíveis para adoção
+  getPetsParaAdocao(): Observable<Pet[]> {
+    return this.http.get<Pet[]>(`${this.apiUrl}/adocao`); // Faz a requisição GET para listar pets disponíveis para adoção
   }
 }

@@ -61,6 +61,18 @@
       </div>
     </div>
 
+    <!-- Campo para Adoção -->
+    <div>
+      <label for="paraAdocao">Disponível para Adoção:</label>
+      <select id="paraAdocao" formControlName="paraAdocao">
+        <option [ngValue]="false">Não</option>
+        <option [ngValue]="true">Sim</option>
+      </select>
+      <div *ngIf="cadastroPetForm.get('paraAdocao')?.invalid && cadastroPetForm.get('paraAdocao')?.touched" class="error-message">
+        Seleção para adoção é obrigatória.
+      </div>
+    </div>
+
     <button type="submit" [disabled]="cadastroPetForm.invalid">Cadastrar Pet</button>
     <button type="button" (click)="router.navigate(['/inicio'])" class="cancel-button">Cancelar</button>
   </form>

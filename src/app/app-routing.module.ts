@@ -6,6 +6,7 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { ProfileComponent } from './pages/profile/profile.component'; // Adicione o ProfileComponent
 import { CadastroPetComponent } from './pages/cadastro-pet/cadastro-pet.component'; // Importe o CadastroPetComponent
 import { EditarPetComponent } from './pages/editar-pet/editar-pet.component';
+import { AdotarPetComponent } from './pages/adotar-pet/adotar-pet.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redireciona para login se estiver vazio
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'inicio', component: InicioComponent }, // Página inicial (home) após login
   { path: 'profile', component: ProfileComponent }, // Página de perfil
   { path: 'cadastro-pet', component: CadastroPetComponent },
-  { path: 'editar-pet/id', component: EditarPetComponent }, // Adicionado o parâmetro :id
+  { path: 'editar-pet/:id', component: EditarPetComponent }, // Adicionado o parâmetro :id
+  { path: 'adotar-pet', component: AdotarPetComponent },
 ];
 
 @NgModule({

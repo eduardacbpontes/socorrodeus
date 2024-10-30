@@ -19,6 +19,10 @@ const Pet = sequelize.define('Pet', {
     type: DataTypes.BOOLEAN,
     allowNull: true, // Permitir nulo para o campo castrado
   },
+  paraAdocao: { // Novo campo para indicar se o pet está para adoção
+    type: DataTypes.BOOLEAN,
+    defaultValue: false // Valor padrão como false
+  },
   donoId: { // Alterado para donoId para manter consistência
     type: DataTypes.INTEGER,
     references: {

@@ -29,7 +29,8 @@ export class CadastroPetComponent {
       tipo: ['', Validators.required],
       raca: ['', Validators.required],
       porte: ['', Validators.required],
-      castrado: [false, Validators.required]
+      castrado: [false, Validators.required],
+      paraAdocao: [false, Validators.required] // Adicionando o campo para adoção aqui
     });
   }
 
@@ -42,9 +43,8 @@ export class CadastroPetComponent {
           ...this.cadastroPetForm.value,
           donoId: donoId
         };
-
-        petData.castrado = petData.castrado;
-
+        //petData.castrado = petData.castrado;
+        // Log para verificação
         console.log('Dados do Pet a serem enviados:', petData);
 
         this.petService.cadastrarPet(petData).subscribe(
@@ -64,5 +64,4 @@ export class CadastroPetComponent {
       console.error('Formulário inválido:', this.cadastroPetForm.errors);
     }
   }
-
 }
